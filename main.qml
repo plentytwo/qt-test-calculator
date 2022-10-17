@@ -97,6 +97,7 @@ Window {
 
             GroupBox {
                 title: "<font color='#fff'>Calculator Mode</font>"
+
                 x: 10
                 y: 20
                 width: 150

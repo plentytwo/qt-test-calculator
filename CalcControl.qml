@@ -44,6 +44,65 @@ Item {
         CalcButton { text: "CE"; onClicked: command("CE"); }
     }
 
+    ListModel {
+        id: decModel
+
+        ListElement { txt: "7"; fn: "value " }
+        ListElement { txt: "8"; fn: "value " }
+        ListElement { txt: "9"; fn: "value " }
+        ListElement { txt: "/"; fn: "symbol" }
+        ListElement { txt: "4"; fn: "value " }
+        ListElement { txt: "5"; fn: "value " }
+        ListElement { txt: "6"; fn: "value " }
+        ListElement { txt: "*"; fn: "symbol" }
+        ListElement { txt: "1"; fn: "value " }
+        ListElement { txt: "2"; fn: "value " }
+        ListElement { txt: "3"; fn: "value " }
+        ListElement { txt: "-"; fn: "symbol" }
+        ListElement { txt: "0"; fn: "value " }
+        ListElement { txt: "."; fn: "value " }
+        ListElement { txt: "="; fn: "solve " }
+        ListElement { txt: "+"; fn: "symbol" }
+    }
+
+    ListModel {
+        id: hexModel
+
+        ListElement { txt: "d"; fn: "value";  }
+        ListElement { txt: "e"; fn: "value";  }
+        ListElement { txt: "f"; fn: "value";  }
+        ListElement { txt: "a"; fn: "value"; column: 0; row: 1 }
+        ListElement { txt: "b"; fn: "value";  }
+        ListElement { txt: "c"; fn: "value";  }
+        ListElement { txt: "7"; fn: "value"; column: 0; row: 2 }
+        ListElement { txt: "8"; fn: "value";  }
+        ListElement { txt: "9"; fn: "value";  }
+        ListElement { txt: "/"; fn: "symbol"; }
+        ListElement { txt: "4"; fn: "value";  }
+        ListElement { txt: "5"; fn: "value";  }
+        ListElement { txt: "6"; fn: "value";  }
+        ListElement { txt: "*"; fn: "symbol"; }
+        ListElement { txt: "1"; fn: "value";  }
+        ListElement { txt: "2"; fn: "value";  }
+        ListElement { txt: "3"; fn: "value";  }
+        ListElement { txt: "-"; fn: "symbol"; }
+        ListElement { txt: "0"; fn: "value";  }
+        ListElement { txt: "."; opacity: .1 }
+        ListElement { txt: "="; fn: "solve"; }
+        ListElement { txt: "+"; fn: "symbol"; }
+    }
+
+    Component {
+        id: buttonDelegate
+        CalcButton {
+            text: model.txt
+            onClicked: model.fn ? model.fn === "value" ? value(text) : model.fn === "symbol" ? symbol(text) : solve() : {}
+            Layout.column: model.col || {}
+            Layout.row: model.row || {}
+            opacity: model.opacity || 1
+        }
+    }
+
     GridLayout {
         visible: isHEX;
 
@@ -55,29 +114,10 @@ Item {
         rowSpacing: 12
         columnSpacing: 12
 
-        CalcButton { text: "d"; onClicked: value(text); }
-        CalcButton { text: "e"; onClicked: value(text); }
-        CalcButton { text: "f"; onClicked: value(text); }
-        CalcButton { text: "a"; onClicked: value(text); Layout.column: 0; Layout.row: 1 }
-        CalcButton { text: "b"; onClicked: value(text); }
-        CalcButton { text: "c"; onClicked: value(text); }
-
-        CalcButton { text: "7"; onClicked: value(text); Layout.column: 0; Layout.row: 2 }
-        CalcButton { text: "8"; onClicked: value(text); }
-        CalcButton { text: "9"; onClicked: value(text); }
-        CalcButton { text: "/"; onClicked: symbol(text); }
-        CalcButton { text: "4"; onClicked: value(text); }
-        CalcButton { text: "5"; onClicked: value(text); }
-        CalcButton { text: "6"; onClicked: value(text); }
-        CalcButton { text: "*"; onClicked: symbol(text); }
-        CalcButton { text: "1"; onClicked: value(text); }
-        CalcButton { text: "2"; onClicked: value(text); }
-        CalcButton { text: "3"; onClicked: value(text); }
-        CalcButton { text: "-"; onClicked: symbol(text); }
-        CalcButton { text: "0"; onClicked: value(text); }
-        CalcButton { text: "."; opacity: .1 }
-        CalcButton { text: "="; onClicked: solve(); }
-        CalcButton { text: "+"; onClicked: symbol(text); }
+        Repeater {
+            model: hexModel
+            delegate: buttonDelegate
+        }
     }
     
     GridLayout {
@@ -91,21 +131,9 @@ Item {
         rowSpacing: 12
         columnSpacing: 12
 
-        CalcButton { text: "7"; onClicked: value(text); }
-        CalcButton { text: "8"; onClicked: value(text); }
-        CalcButton { text: "9"; onClicked: value(text); }
-        CalcButton { text: "/"; onClicked: symbol(text); }
-        CalcButton { text: "4"; onClicked: value(text); }
-        CalcButton { text: "5"; onClicked: value(text); }
-        CalcButton { text: "6"; onClicked: value(text); }
-        CalcButton { text: "*"; onClicked: symbol(text); }
-        CalcButton { text: "1"; onClicked: value(text); }
-        CalcButton { text: "2"; onClicked: value(text); }
-        CalcButton { text: "3"; onClicked: value(text); }
-        CalcButton { text: "-"; onClicked: symbol(text); }
-        CalcButton { text: "0"; onClicked: value(text); }
-        CalcButton { text: "."; onClicked: value(text); }
-        CalcButton { text: "="; onClicked: solve(); }
-        CalcButton { text: "+"; onClicked: symbol(text); }
+        Repeater {
+            model: decModel
+            delegate: buttonDelegate
+        }
     }
 }
