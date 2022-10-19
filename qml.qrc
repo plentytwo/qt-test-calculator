@@ -4,5 +4,7 @@
         <file>CalcButton.qml</file>
         <file>CalcScreen.qml</file>
         <file>CalcControl.qml</file>
+        <file>lang_fr.qm</file>
+        <file>lang_de.qm</file>
     </qresource>
 </RCC>

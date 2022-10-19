@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <qqml.h>
+#include <QTranslator>
 
 #include <cmath>
 #include <sstream>
@@ -41,6 +42,8 @@ public slots:
     void pushCommand(QString key);
     void pushTypeChange(QString key);
     void solve();
+
+    Q_INVOKABLE void setLanguage(QString lang);
 
 private:
 

@@ -13,9 +13,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    calculatorbrains.cpp
+    calculatorbrains.cpp \
+    translator.cpp
 
 RESOURCES += qml.qrc
+
+TRANSLATIONS += lang_fr.ts \
+                lang_de.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -29,8 +33,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    calculatorbrains.h
+    calculatorbrains.h \
+    translator.h
 
 CONFIG += qmltypes
-QML_IMPORT_NAME = com.qt.calculatorbrains
+QML_IMPORT_NAME = com.qt.calculatorbrains \
+                  com.qt.texttranslator
 QML_IMPORT_MAJOR_VERSION = 1

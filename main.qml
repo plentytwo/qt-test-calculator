@@ -6,12 +6,13 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 import com.qt.calculatorbrains 1.0
+import com.qt.texttranslator 1.0
 
 Window {
     visible: true
 
     id: wnd
-    title: qsTr("Calculator")
+    title: qsTr("Calculator") + textTranslator.emptyString
 
     width: 400
     height: 480
@@ -26,6 +27,10 @@ Window {
 
     CalculatorBrains {
         id: calculatorBrains
+    }
+
+    TextTranslator {
+        id: textTranslator
     }
 
     CalcControl {
@@ -96,7 +101,7 @@ Window {
             }
 
             GroupBox {
-                title: "<font color='#fff'>Calculator Mode</font>"
+                title: qsTr("Calculator Mode") + textTranslator.emptyString
 
                 x: 10
                 y: 20
@@ -123,6 +128,40 @@ Window {
                     }
                 }
             }
+            GroupBox {
+                title: qsTr("Language") + textTranslator.emptyString
+
+                x: 10
+                y: 120
+                width: 150
+                height: 100
+
+                ExclusiveGroup {
+                    id: localeRadioGroup
+                }
+
+                ColumnLayout {
+                    RadioButton {
+                        checked: true
+                        exclusiveGroup: localeRadioGroup
+                        onClicked: { textTranslator.selectLanguage("en") }
+
+                        text: "<font color='#fff'>EN</font>"
+                    }
+                    RadioButton {
+                        exclusiveGroup: localeRadioGroup
+                        onClicked: { textTranslator.selectLanguage("de") }
+
+                        text: "<font color='#fff'>DE</font>"
+                    }
+                    RadioButton {
+                        exclusiveGroup: localeRadioGroup
+                        onClicked: { textTranslator.selectLanguage("fr") }
+
+                        text: "<font color='#fff'>FR</font>"
+                    }
+                }
+            }
         }
 
         MouseArea {
@@ -138,6 +177,7 @@ Window {
                 wndAnimation.to = sidebarOpened ? 570 : 400
                 wndAnimation.running = true
             }
+
         }
 
         NumberAnimation {

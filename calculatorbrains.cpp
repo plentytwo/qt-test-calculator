@@ -15,6 +15,7 @@ void CalculatorBrains::pushValue(QString key)
     primary += key.toStdString()[0];
 
     setPrimaryValue(QString::fromUtf8(primary.c_str()));
+
 }
 
 void CalculatorBrains::pushSymbol(QString sym)
@@ -122,6 +123,11 @@ void CalculatorBrains::solve()
     primary = "";
     secondary = "";
     operation = 0;
+}
+
+Q_INVOKABLE void CalculatorBrains::setLanguage(QString lang)
+{
+
 }
 
 QString CalculatorBrains::primaryValue()
